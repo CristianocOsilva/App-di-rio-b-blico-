@@ -6,6 +6,7 @@ const sqlite3 = require('sqlite3');
 const ejs = require('ejs');
 
 const app = express();
+const port = 4000
 
 // Configuração do banco de dados SQLite
 const db = new sqlite3.Database('diario.db');
@@ -60,7 +61,7 @@ app.get('/auth/github/callback',
 );
 
 // Inicialização do servidor
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
 });

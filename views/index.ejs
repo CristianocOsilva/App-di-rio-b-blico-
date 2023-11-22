@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diário Bíblico - Conexões e Reflexões</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+    }
+    #colunas {
+      column-count: 2;
+      column-gap: 20px;      
+    }
+    textarea {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    p {
+      margin: 0 0 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>Diário Bíblico</h1>
+  <textarea id="textoDiario" rows="10" placeholder="Escreva seu texto aqui..."></textarea>
+  <button onclick="salvarTexto()">Salvar</button>
+  <div id="colunas"></div>
+  <script>
+    function salvarTexto() {
+      const texto = document.getElementById('textoDiario').value;
+      const colunasDiv = document.getElementById('colunas');
+      colunasDiv.innerHTML += `<p>${texto}</p>`;
+      document.getElementById('textoDiario').value = "";  
+    }
+  </script>
+  <div>
+    <h2>Reflexão do dia</h2>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@octokit/rest@17"></script>
+    <script>
+        // Crie um token de acesso pessoal no GitHub e substitua 'SEU_TOKEN_AQUI'
+        const token = 'SEU_TOKEN_AQUI';
+        const octokit = new Octokit({ auth: token });
+
+        // Verifica se o usuário está logado no GitHub
+        octokit.users.getAuthenticated()
+            .then(response => {
+                const usuarioLogado = response.status === 200;
+                
+                // Se estiver logado, insere o texto diretamente na página
+                if (usuarioLogado) {
+                    document.body.innerHTML += "<p>Seu texto inserido diretamente na página!</p>";
+                }
+
+                // Redireciona para a primeira página
+                window.location.href = "/";
+            })
+            .catch(error => {
+                console.error('Erro ao verificar autenticação:', error);
+            });
+    
+      
+    </script>
+  </div>
+    <h2>Vídeos relacionados ao texto</h2>
+    <video width="320" height="240" controls>
+      <source src="/videos/seu_video_mp4" type="video/mp4"> 
+      Seu navegador não suporta o elemento de vídeo.
+    </video>
+  
+  <div>
+    <h2>Sons Inpiradores</h2>
+    <audio controls>
+      <source src="/sounds/seu_som_.mp3" type="audio/mp3">
+      Seu navegador não suporta o elemento de áudio. 
+    </audio>
+  </div>
+  <% if (user) { %>
+    <p>Olá, <%= user.displayName %></p>
+    <a href="/logout">Sair</a>
+  <% } else { %>
+    <a href="/auth/github">Entrar com GitHub</a>
+  <% } %>
+</body>
+</html>

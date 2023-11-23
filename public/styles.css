@@ -1,0 +1,29 @@
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    }
+h1, h2, p {
+    color: #ffd700;
+    text-align: center;
+    }
+#colunas {
+    column-count: 2;
+    column-gap: 20px;      
+    }
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    }
+div {
+    margin-bottom: 20px;
+    }
+video, audio {
+    width: 100%;
+    }
+p {
+    margin: 0 0 10px 0;
+    }

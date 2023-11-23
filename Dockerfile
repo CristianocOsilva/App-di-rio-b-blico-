@@ -2,7 +2,7 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package.json .
+COPY ["package.json", "package-lock.json*", "./"]
 
 RUN npm install
 
@@ -12,6 +12,6 @@ HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD curl 
 
 EXPOSE 4000
 
-CMD ["npm", "start"]
+CMD [ "node", "app.js" ]
 
 
